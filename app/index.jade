@@ -4,4 +4,26 @@ html(lang="en" ng-app='Kanoevents')
         title Kano Events
         include shared/head
     body
-        span Kano Events
+        #header
+            h1 Live Match Capture
+        .pure-g.events
+            .pure-u-1-2.eventsHolder
+                input(type='player1', placeholder='Player 1 Name')  
+                button.button-point.pure-button.pure-button-primary(type='submit') Point won        
+                button.button-point.pure-button.pure-button-primary(type='submit') Smash point      
+                button.button-point.pure-button.pure-button-primary(type='submit') Lob point    
+                button.button-inplay.pure-button.pure-button-primary(type='submit') Let       
+                button.button-inplay.pure-button.pure-button-primary(type='submit') Rally hit   
+                button.button-inplay.pure-button.pure-button-primary(type='submit') Good serve    
+                button.button-lostpoint.pure-button.pure-button-primary(type='submit') Bad serve
+            .pure-u-1-2.eventsHolder
+                input(type='player2', placeholder='Player 2 Name')
+                button.button-point.pure-button.pure-button-primary(type='submit') Point won
+                button.button-point.pure-button.pure-button-primary(type='submit') Smash point
+                button.button-point.pure-button.pure-button-primary(type='submit') Lob point    
+                button.button-inplay.pure-button.pure-button-primary(type='submit') Let
+                button.button-inplay.pure-button.pure-button-primary(type='submit') Rally hit      
+                button.button-inplay.pure-button.pure-button-primary(type='submit') Good serve       
+                button.button-lostpoint.pure-button.pure-button-primary(type='submit') Bad serve
+        #footer
+            button.pure-button.pure-button-primary(type='submit') Start Match
