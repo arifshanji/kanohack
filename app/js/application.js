@@ -17,7 +17,7 @@ window.Kanoevents = angular.module('Kanoevents', [
 	'kanoevents.services'
 ]);
 
-kanoevents.config(['$routeProvider','$locationProvider',
+Kanoevents.config(['$routeProvider','$locationProvider',
 	function($routeProvider, $locationProvider) {
 		$locationProvider.html5Mode(true);
 		$routeProvider
