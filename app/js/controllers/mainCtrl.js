@@ -1,6 +1,5 @@
-angular.module('uberhack.controllers')
-.controller('mainCtrl', ['Authentication', '$scope', '$rootScope', '$location',
-	function(Authentication, $scope, $rootScope, $location) {
-
+angular.module('kanoevents.controllers')
+.controller('mainCtrl', ['$scope', '$rootScope', '$location',
+	function($scope, $rootScope, $location) {
 	}
 ]);

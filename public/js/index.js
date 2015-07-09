@@ -18,7 +18,7 @@ window.Kanoevents = angular.module('Kanoevents', [
 	'kanoevents.services'
 ]);
 
-kanoevents.config(['$routeProvider','$locationProvider',
+Kanoevents.config(['$routeProvider','$locationProvider',
 	function($routeProvider, $locationProvider) {
 		$locationProvider.html5Mode(true);
 		$routeProvider
@@ -28,10 +28,9 @@ kanoevents.config(['$routeProvider','$locationProvider',
 			});
 	}]);
 },{"./controllers/mainCtrl.js":2,"./services/refs.js":3}],2:[function(require,module,exports){
-angular.module('uberhack.controllers')
-.controller('mainCtrl', ['Authentication', '$scope', '$rootScope', '$location',
-	function(Authentication, $scope, $rootScope, $location) {
-
+angular.module('kanoevents.controllers')
+.controller('mainCtrl', ['$scope', '$rootScope', '$location',
+	function($scope, $rootScope, $location) {
 	}
 ]);
 
