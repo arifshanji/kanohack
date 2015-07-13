@@ -2,50 +2,63 @@ angular.module('kanoevents.controllers')
 .controller('mainCtrl', ['$scope', '$rootScope', '$location', '$http',
 	function($scope, $rootScope, $location, $http) {
 		$scope.updates = [];
-		$scope.players = {};
+		$scope.player1 = {
+			name: undefined,
+			score: 0
+		};
+
+		$scope.player2 = {
+			name: undefined,
+			score: 0
+		};
 
 		$scope.startMatch = function (player, opponent) {
-			var message = player + ' has just started a game of 11 against ' + opponent;
-			var payload = {
-				text: message
-			};
+			if (!player.name || !opponent.name) {
+				alert('Please enter the name of the player before proceeding');
+				return false;
+			}
+			else {
+				var message = player.name + ' has just started a game of 11 against ' + opponent.name;
+				var payload = {
+					text: message
+				};
 
-			initialiseMatch(player, opponent);
-			postMessage(payload);
+				postMessage(payload);
+			}
 		};
 
 		$scope.pointWon = function (player, opponent) {
-			var message = player + ' just won a point over ' + opponent;
+			var message = player.name + ' just won a point over ' + opponent.name;
 			var payload = {
 				text: message
 			};
 
-			$scope[player].score++;
+			addPoint(player, opponent);
 			postMessage(payload);
 		};
 
 		$scope.smashPoint = function (player, opponent) {
-			var message = player + ' just won a smash point!';
+			var message = player.name + ' just won a smash point!';
 			var payload = {
 				text: message
 			};
 
-			$scope[player].score++;
+			addPoint(player, opponent);
 			postMessage(payload);
 		};
 
 		$scope.lobPoint = function (player, opponent) {
-			var message = player + ' just won a point by lobbing ' + opponent;
+			var message = player.name + ' just won a point by lobbing ' + opponent.name;
 			var payload = {
 				text: message
 			};
 
-			$scope[player].score++;
+			addPoint(player, opponent);
 			postMessage(payload);
 		};
 
 		$scope.let = function (player) {
-			var message = 'Let!\n' + player + ' has to serve again!';
+			var message = 'Let!\n' + player.name + ' has to serve again!';
 			var payload = {
 				text: message
 			};
@@ -54,7 +67,7 @@ angular.module('kanoevents.controllers')
 		};
 
 		$scope.rallyHit = function (player) {
-			var message = player + ' had a rally hit!';
+			var message = player.name + ' had a rally hit!';
 			var payload = {
 				text: message
 			};
@@ -63,7 +76,7 @@ angular.module('kanoevents.controllers')
 		};
 
 		$scope.goodServe = function (player) {
-			var message = 'That was a good serve by ' + player;
+			var message = 'That was a good serve by ' + player.name;
 			var payload = {
 				text: message
 			};
@@ -72,7 +85,7 @@ angular.module('kanoevents.controllers')
 		};
 
 		$scope.badServe = function (player) {
-			var message = 'That was a poor serve by ' + player;
+			var message = 'That was a poor serve by ' + player.name;
 			var payload = {
 				text: message
 			};
@@ -80,18 +93,38 @@ angular.module('kanoevents.controllers')
 			postMessage(payload);
 		};
 
-		function initialiseMatch(player, opponent) {
-			$scope.players.player1 = player;
-			$scope.players.player2 = opponent;
-			$scope[player] = { score : 0 };
-			$scope[opponent] = { score : 0 };
+		function addScoresToPayload(payload) {
+			var score1 = $scope.player1.score,
+				score2 = $scope.player2.score;
+			
+			payload.text = "`[" + score1 + " - " + score2 + "]` " + payload.text;
 		}
 
-		function addScoresToPayload(payload) {
-			var score1 = $scope[$scope.players.player1].score,
-				score2 = $scope[$scope.players.player2].score;
-			
-			payload.text = "[" + score1 + " - " + score2 + "] " + payload.text;
+		function addPoint (player, opponent) {
+			player.score += 1;
+			getWinner(player, opponent);
+		}
+
+		// show the total scores for the match
+		function getWinner (player, opponent) {
+			var message;
+
+			if (player.score === 11) {
+				message = player.name + ' has just won the game against ' + opponent.name;
+			}
+
+			else if (opponent.score === 11) {
+				message = opponent.name + ' has just won the game against ' + player.name;
+			}
+
+			var payload = {
+				text: message
+			};
+
+			if (message) {
+				postMessage(payload);
+				alert(message);
+			}
 		}
 
 		function postMessage (payload) {

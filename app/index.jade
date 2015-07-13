@@ -8,24 +8,24 @@ html(lang="en" ng-app='Kanoevents')
             h1 Live Match Capture
         .pure-g.events
             .pure-u-1-2.eventsHolder
-                input(type='text' ng-model='player1' placeholder='Player 1 Name')
-                button.button-point.pure-button.pure-button-primary(ng-click='pointWon(player1, player2)') Point won        
-                button.button-point.pure-button.pure-button-primary(ng-click='smashPoint(player1, player2)') Smash point      
-                button.button-point.pure-button.pure-button-primary(ng-click='lobPoint(player1, player2)') Lob point    
-                button.button-inplay.pure-button.pure-button-primary(ng-click='let(player1)') Let       
-                button.button-inplay.pure-button.pure-button-primary(ng-click='rallyHit(player1)') Rally hit   
-                button.button-inplay.pure-button.pure-button-primary(ng-click='goodServe(player1)') Good serve    
-                button.button-lostpoint.pure-button.pure-button-primary(ng-click='badServe(player1)') Bad serve
+                input(type='text' ng-model='player1.name' placeholder='Player 1 Name')
+                button.button-point.pure-button.pure-button-primary(ng-show='match' ng-click='pointWon(player1, player2)') Point won        
+                button.button-point.pure-button.pure-button-primary(ng-show='match' ng-click='smashPoint(player1, player2)') Smash point      
+                button.button-point.pure-button.pure-button-primary(ng-show='match' ng-click='lobPoint(player1, player2)') Lob point    
+                button.button-inplay.pure-button.pure-button-primary(ng-show='match' ng-click='let(player1)') Let       
+                button.button-inplay.pure-button.pure-button-primary(ng-show='match' ng-click='rallyHit(player1)') Rally hit   
+                button.button-inplay.pure-button.pure-button-primary(ng-show='match' ng-click='goodServe(player1)') Good serve    
+                button.button-lostpoint.pure-button.pure-button-primary(ng-show='match' ng-click='badServe(player1)') Bad serve
             .pure-u-1-2.eventsHolder
-                input(type='text' ng-model='player2' placeholder='Player 2 Name')
-                button.button-point.pure-button.pure-button-primary(ng-click='pointWon(player2, player1)') Point won
-                button.button-point.pure-button.pure-button-primary(ng-click='smashPoint(player2, player1)') Smash point
-                button.button-point.pure-button.pure-button-primary(ng-click='lobPoint(player2, player1)') Lob point    
-                button.button-inplay.pure-button.pure-button-primary(ng-click='let(player2)') Let
-                button.button-inplay.pure-button.pure-button-primary(ng-click='rallyHit(player2)') Rally hit      
-                button.button-inplay.pure-button.pure-button-primary(ng-click='goodServe(player2)') Good serve       
-                button.button-lostpoint.pure-button.pure-button-primary(ng-click='badServe(player2)') Bad serve
+                input(type='text' ng-model='player2.name' placeholder='Player 2 Name')
+                button.button-point.pure-button.pure-button-primary(ng-show='match' ng-click='pointWon(player2, player1)') Point won
+                button.button-point.pure-button.pure-button-primary(ng-show='match' ng-click='smashPoint(player2, player1)') Smash point
+                button.button-point.pure-button.pure-button-primary(ng-show='match' ng-click='lobPoint(player2, player1)') Lob point    
+                button.button-inplay.pure-button.pure-button-primary(ng-show='match' ng-click='let(player2)') Let
+                button.button-inplay.pure-button.pure-button-primary(ng-show='match' ng-click='rallyHit(player2)') Rally hit      
+                button.button-inplay.pure-button.pure-button-primary(ng-show='match' ng-click='goodServe(player2)') Good serve       
+                button.button-lostpoint.pure-button.pure-button-primary(ng-show='match' ng-click='badServe(player2)') Bad serve
         #footer
-            button.pure-button.pure-button-primary(ng-click='startMatch(player1, player2)') Start Match
+            button.pure-button.pure-button-primary(ng-class='{"pure-button-disabled" : !player1.name || !player2.name}' ng-show='!match'  ng-click='startMatch(player1, player2); match = true') Start Match
             ul#updates
-                li(ng-repeat="update in updates track by $index"): {{update}}
+                li(ng-repeat="update in updates track by $index") {{update}}
