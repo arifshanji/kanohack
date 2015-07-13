@@ -152,6 +152,7 @@ angular.module('kanoevents.controllers')
 			};
 
 			if (message) {
+				$scope.match = false;
 				postMessage(payload);
 				alert(message);
 			}
