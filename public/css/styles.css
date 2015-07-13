@@ -1,0 +1,32 @@
+body {
+  padding: 10px;
+}
+button,
+input {
+  margin: 2px;
+  text-align: center;
+}
+.button-point {
+  background-color: #008000;
+  width: 80%;
+}
+.button-lostpoint {
+  background-color: #f00;
+  width: 80%;
+}
+.button-inplay {
+  background-color: #c0c0c0;
+  width: 80%;
+}
+.eventsHolder {
+  text-align: center;
+}
+.events {
+  width: 100%;
+}
+#header {
+  text-align: center;
+}
+#footer {
+  text-align: center;
+}

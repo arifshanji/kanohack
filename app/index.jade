@@ -3,27 +3,27 @@ html(lang="en" ng-app='Kanoevents')
     head
         title Kano Events
         include shared/head
-    body
+    body(ng-controller='mainCtrl')
         #header
             h1 Live Match Capture
         .pure-g.events
             .pure-u-1-2.eventsHolder
-                input(type='player1', placeholder='Player 1 Name')  
-                button.button-point.pure-button.pure-button-primary(type='submit') Point won        
-                button.button-point.pure-button.pure-button-primary(type='submit') Smash point      
-                button.button-point.pure-button.pure-button-primary(type='submit') Lob point    
-                button.button-inplay.pure-button.pure-button-primary(type='submit') Let       
-                button.button-inplay.pure-button.pure-button-primary(type='submit') Rally hit   
-                button.button-inplay.pure-button.pure-button-primary(type='submit') Good serve    
-                button.button-lostpoint.pure-button.pure-button-primary(type='submit') Bad serve
+                input(type='text' ng-model='player1' placeholder='Player 1 Name')
+                button.button-point.pure-button.pure-button-primary(ng-click='pointWon(player1, player2)') Point won        
+                button.button-point.pure-button.pure-button-primary(ng-click='smashPoint(player1, player2)') Smash point      
+                button.button-point.pure-button.pure-button-primary(ng-click='lobPoint(player1, player2)') Lob point    
+                button.button-inplay.pure-button.pure-button-primary(ng-click='let(player1)') Let       
+                button.button-inplay.pure-button.pure-button-primary(ng-click='rallyHit(player1)') Rally hit   
+                button.button-inplay.pure-button.pure-button-primary(ng-click='goodServe(player1)') Good serve    
+                button.button-lostpoint.pure-button.pure-button-primary(ng-click='badServe(player1)') Bad serve
             .pure-u-1-2.eventsHolder
-                input(type='player2', placeholder='Player 2 Name')
-                button.button-point.pure-button.pure-button-primary(type='submit') Point won
-                button.button-point.pure-button.pure-button-primary(type='submit') Smash point
-                button.button-point.pure-button.pure-button-primary(type='submit') Lob point    
-                button.button-inplay.pure-button.pure-button-primary(type='submit') Let
-                button.button-inplay.pure-button.pure-button-primary(type='submit') Rally hit      
-                button.button-inplay.pure-button.pure-button-primary(type='submit') Good serve       
-                button.button-lostpoint.pure-button.pure-button-primary(type='submit') Bad serve
+                input(type='text' ng-model='player2' placeholder='Player 2 Name')
+                button.button-point.pure-button.pure-button-primary(ng-click='pointWon(player1, player2)') Point won
+                button.button-point.pure-button.pure-button-primary(ng-click='smashPoint(player1, player2)') Smash point
+                button.button-point.pure-button.pure-button-primary(ng-click='lobPoint(player1, player2)') Lob point    
+                button.button-inplay.pure-button.pure-button-primary(ng-click='let(player2') Let
+                button.button-inplay.pure-button.pure-button-primary(ng-click='rallyHit(player2)') Rally hit      
+                button.button-inplay.pure-button.pure-button-primary(ng-click='goodServe(player2)') Good serve       
+                button.button-lostpoint.pure-button.pure-button-primary(ng-click='badServe(player2)') Bad serve
         #footer
-            button.pure-button.pure-button-primary(type='submit') Start Match
+            button.pure-button.pure-button-primary(ng-click='startMatch(player1, player2)') Start Match
