@@ -142,7 +142,7 @@ angular.module('kanoevents.controllers')
 			request.data = JSON.stringify(payload);
 
 			// update view
-			$scope.updates.push( payload.text );
+			$scope.updates.unshift( payload.text );
 
 			$http(request)
 			.success(function (data, status, headers, config) {
