@@ -31,6 +31,8 @@ Kanoevents.config(['$routeProvider','$locationProvider',
 angular.module('kanoevents.controllers')
 .controller('mainCtrl', ['$scope', '$rootScope', '$location', '$http',
 	function($scope, $rootScope, $location, $http) {
+		$scope.updates = [];
+		$scope.players = {};
 
 		$scope.startMatch = function (player, opponent) {
 			var message = player + ' has just started a game of 11 against ' + opponent;
@@ -38,6 +40,7 @@ angular.module('kanoevents.controllers')
 				text: message
 			};
 
+			initialiseMatch(player, opponent);
 			postMessage(payload);
 		};
 
@@ -47,6 +50,7 @@ angular.module('kanoevents.controllers')
 				text: message
 			};
 
+			$scope[player].score++;
 			postMessage(payload);
 		};
 
@@ -56,6 +60,7 @@ angular.module('kanoevents.controllers')
 				text: message
 			};
 
+			$scope[player].score++;
 			postMessage(payload);
 		};
 
@@ -65,6 +70,7 @@ angular.module('kanoevents.controllers')
 				text: message
 			};
 
+			$scope[player].score++;
 			postMessage(payload);
 		};
 
@@ -104,16 +110,35 @@ angular.module('kanoevents.controllers')
 			postMessage(payload);
 		};
 
+		function initialiseMatch(player, opponent) {
+			$scope.players.player1 = player;
+			$scope.players.player2 = opponent;
+			$scope[player] = { score : 0 };
+			$scope[opponent] = { score : 0 };
+		}
+
+		function addScoresToPayload(payload) {
+			var score1 = $scope[$scope.players.player1].score,
+				score2 = $scope[$scope.players.player2].score;
+			
+			payload.text = "[" + score1 + " - " + score2 + "] " + payload.text;
+		}
+
 		function postMessage (payload) {
+
 			// send message to slack channel using the webhook integration
-			payload = JSON.stringify(payload);
 			var webhookURL 	= 'https://hooks.slack.com/services/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',
-				 	request 		= {
-						method: 'POST',
-						url: webhookURL,
-						headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-						data: payload
-					};
+			 	request 	= {
+					method: 'POST',
+					url: webhookURL,
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+				};
+
+			addScoresToPayload(payload);
+			request.data = JSON.stringify(payload);
+
+			// update view
+			$scope.updates.push( payload.text );
 
 			$http(request)
 			.success(function (data, status, headers, config) {

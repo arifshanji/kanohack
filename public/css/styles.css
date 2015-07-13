@@ -30,3 +30,7 @@ input {
 #footer {
   text-align: center;
 }
+ul#updates {
+  list-style: none;
+  text-align: left;
+}
