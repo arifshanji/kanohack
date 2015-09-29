@@ -131,7 +131,7 @@ angular.module('kanoevents.controllers')
 		function postMessage (payload) {
 
 			// send message to slack channel using the webhook integration
-			var webhookURL 	= 'https://hooks.slack.com/services/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',
+			var webhookURL 	= 'https://hooks.slack.com/services/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',
 			 	request 	= {
 					method: 'POST',
 					url: webhookURL,
