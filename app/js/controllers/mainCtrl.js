@@ -18,7 +18,7 @@ angular.module('kanoevents.controllers')
 				return false;
 			}
 			else {
-				var message = player.name + ' has just started a game of 11 against ' + opponent.name;
+				var message = player.name + ' has just started a game of 21 against ' + opponent.name;
 				var payload = {
 					text: message
 				};
@@ -109,11 +109,11 @@ angular.module('kanoevents.controllers')
 		function getWinner (player, opponent) {
 			var message;
 
-			if (player.score === 11) {
+			if (player.score === 21) {
 				message = player.name + ' has just won the game against ' + opponent.name;
 			}
 
-			else if (opponent.score === 11) {
+			else if (opponent.score === 21) {
 				message = opponent.name + ' has just won the game against ' + player.name;
 			}
 
